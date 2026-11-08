@@ -163,7 +163,6 @@ public:
     long long baseFare() const override { return 0LL; } // Retorna tarifa base cero para rutas alimentadoras
     string serviceType() const override { return "Feeder route"; } // Retorna el nombre del servicio alimentador
 
-    bool allowsStudentFlatFare() const override { return false; } // Deniega la tarifa plana de estudiante para este modo
     bool opensIntegrationWindow() const override { return false; } // Deniega la apertura de ventana de integracion para rutas alimentadoras
 };
 
@@ -258,9 +257,7 @@ public:
 
 protected:
     long long computeFare(const TransportMode& mode) const override { // Sobreescribe el calculo de tarifa para adulto mayor
-        if (!mode.allowsIntegration()) { // Verifica si el modo de transporte permite integracion o beneficios sociales
-            return Passenger::computeFare(mode); // Retorna la tarifa base completa sin descuento en modos no integrados
-        }
+
         return Passenger::computeFare(mode) - 490LL; // Descuenta 490 pesos a la tarifa basica obtenida de la clase base
     }
 };
