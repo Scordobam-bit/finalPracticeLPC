@@ -224,7 +224,7 @@ public:
         : Passenger(move(profileName)) {} // Delega inicializacion a Passenger
 
     string profile() const override { // Implementa el perfil descriptivo del pasajero frecuente
-        return "Civica frequent (" + profileName_ + ")"; // Retorna la cadena de perfil frecuente
+        return "Civica frequent"; // Retorna la cadena de perfil frecuente
     }
 };
 
@@ -234,7 +234,7 @@ public:
         : Passenger(move(profileName)) {} // Delega inicializacion a Passenger
 
     string profile() const override { // Implementa el perfil descriptivo del pasajero estudiante
-        return "Municipal student (" + profileName_ + ")"; // Retorna la cadena de perfil estudiante
+        return "Municipal student"; // Retorna la cadena de perfil estudiante
     }
 
 protected:
@@ -252,7 +252,7 @@ public:
         : Passenger(move(profileName)) {} // Delega inicializacion a Passenger
 
     string profile() const override { // Implementa el perfil descriptivo del pasajero adulto mayor
-        return "Senior citizen (" + profileName_ + ")"; // Retorna la cadena de perfil adulto mayor
+        return "Senior citizen"; // Retorna la cadena de perfil adulto mayor
     }
 
 protected:
@@ -268,14 +268,12 @@ public:
         : Passenger(move(profileName)) {} // Delega inicializacion a Passenger
 
     string profile() const override { // Implementa el perfil descriptivo de persona con discapacidad
-        return "Person with disability (" + profileName_ + ")"; // Retorna la cadena de perfil discapacidad
+        return "Person with disability"; // Retorna la cadena de perfil discapacidad
     }
 
 protected:
     long long computeFare(const TransportMode& mode) const override { // Sobreescribe el calculo de tarifa para discapacidad
-        if (!mode.allowsIntegration()) { // Verifica si el modo de transporte permite integracion o beneficios sociales
-            return Passenger::computeFare(mode); // Retorna la tarifa base completa sin descuento en modos no integrados
-        }
+        
         return Passenger::computeFare(mode) - 1100LL; // Descuenta 1100 pesos a la tarifa basica obtenida de la clase base
     }
 };
@@ -286,14 +284,12 @@ public:
         : Passenger(move(profileName)) {} // Delega inicializacion a Passenger
 
     string profile() const override { // Implementa el perfil descriptivo del pasajero ocasional
-        return "Bearer (occasional) (" + profileName_ + ")"; // Retorna la cadena de perfil ocasional
+        return "Bearer (occasional)"; // Retorna la cadena de perfil ocasional
     }
 
 protected:
     long long computeFare(const TransportMode& mode) const override { // Sobreescribe el calculo de tarifa para pasajero ocasional
-        if (!mode.allowsIntegration()) { // Verifica si el modo de transporte permite integracion o recargos tarifarios especiales
-            return Passenger::computeFare(mode); // Retorna la tarifa base completa en modos no integrados
-        }
+        
         return Passenger::computeFare(mode) + 580LL; // Adiciona 580 pesos de recargo a la tarifa basica obtenida de la clase base
     }
 };
